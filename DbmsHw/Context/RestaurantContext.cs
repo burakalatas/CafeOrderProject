@@ -18,6 +18,8 @@ public partial class RestaurantContext : DbContext
 
     public virtual DbSet<Beverage> Beverages { get; set; }
 
+    public virtual DbSet<Beveragelist> Beveragelists { get; set; }
+
     public virtual DbSet<Cashier> Cashiers { get; set; }
 
     public virtual DbSet<Checkout> Checkouts { get; set; }
@@ -25,6 +27,8 @@ public partial class RestaurantContext : DbContext
     public virtual DbSet<Courier> Couriers { get; set; }
 
     public virtual DbSet<Food> Foods { get; set; }
+
+    public virtual DbSet<Foodlist> Foodlists { get; set; }
 
     public virtual DbSet<Kitchen> Kitchens { get; set; }
 
@@ -56,6 +60,7 @@ public partial class RestaurantContext : DbContext
             entity.Property(e => e.Beveragename)
                 .HasMaxLength(100)
                 .HasColumnName("beveragename");
+            entity.Property(e => e.Beverageprice).HasColumnName("beverageprice");
 
             entity.HasMany(d => d.Orders).WithMany(p => p.Beverages)
                 .UsingEntity<Dictionary<string, object>>(
@@ -73,6 +78,23 @@ public partial class RestaurantContext : DbContext
                         j.HasKey("Beverageid", "Orderid").HasName("beverageorderpk");
                         j.ToTable("beverageorder");
                     });
+        });
+
+        modelBuilder.Entity<Beveragelist>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("beveragelist");
+
+            entity.HasIndex(e => e.Beverageid, "unique_beveragelist_beverageid").IsUnique();
+
+            entity.Property(e => e.Beverageid)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("beverageid");
+            entity.Property(e => e.Beveragename)
+                .HasColumnType("character varying")
+                .HasColumnName("beveragename");
+            entity.Property(e => e.Beverageprice).HasColumnName("beverageprice");
         });
 
         modelBuilder.Entity<Cashier>(entity =>
@@ -155,6 +177,7 @@ public partial class RestaurantContext : DbContext
             entity.Property(e => e.Foodname)
                 .HasMaxLength(100)
                 .HasColumnName("foodname");
+            entity.Property(e => e.Foodprice).HasColumnName("foodprice");
 
             entity.HasMany(d => d.Orders).WithMany(p => p.Foods)
                 .UsingEntity<Dictionary<string, object>>(
@@ -172,6 +195,23 @@ public partial class RestaurantContext : DbContext
                         j.HasKey("Foodid", "Orderid").HasName("foodorderpk");
                         j.ToTable("foodorder");
                     });
+        });
+
+        modelBuilder.Entity<Foodlist>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("foodlist");
+
+            entity.HasIndex(e => e.Foodid, "unique_foodlist_foodid").IsUnique();
+
+            entity.Property(e => e.Foodid)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("foodid");
+            entity.Property(e => e.Foodname)
+                .HasMaxLength(100)
+                .HasColumnName("foodname");
+            entity.Property(e => e.Foodprice).HasColumnName("foodprice");
         });
 
         modelBuilder.Entity<Kitchen>(entity =>

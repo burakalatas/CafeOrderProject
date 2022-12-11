@@ -72,18 +72,38 @@ namespace DbmsHw.Controllers
 
             return View(waiterName);
         }
-        
         [HttpGet]
         public IActionResult addOrder()
         {
-            return View();
+            FoodAndBeverage fb = new FoodAndBeverage();
+            fb.Foodlists = c.Foodlists.ToList();
+            fb.Beveragelist = c.Beveragelists.ToList();
+            //FoodName fn = new FoodName
+            //{
+            //    foodName = values.Foodname,
+            //    foodPrice = values.Foodprice,
+            //};
+            return View(fb);
         }
         [HttpPost]
-        public IActionResult AddOrder(Order order) {
-            RestaurantContext c = new RestaurantContext();
-            c.Orders.Add(order);
+        public IActionResult AddOrder(FoodName fn){
+
+            c.Orders.Add(new Order
+            {
+                Orderaddress = fn.orderaddress,
+                Staffid = fn.staffID,
+            });
+            c.Foods.Add(new Food
+            {
+                Foodname = fn.foodname,
+            });
+            c.Beverages.Add(new Beverage
+            {
+                Beveragename = fn.beveragename,
+            });
             c.SaveChanges();
-            return View();
+
+            return RedirectToAction("AddOrder");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

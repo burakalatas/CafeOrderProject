@@ -9,5 +9,7 @@ public partial class Food
 
     public string? Foodname { get; set; }
 
+    public float? Foodprice { get; set; }
+
     public virtual ICollection<Order> Orders { get; } = new List<Order>();
 }
