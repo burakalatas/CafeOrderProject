@@ -1,0 +1,97 @@
+CREATE TABLE "section"(
+    "sectionid" SERIAL not NULL,
+    "sectiontype" CHARACTER VARYING(50) not NULL,
+    CONSTRAINT "sectionpk" PRIMARY key ("sectionid")
+);
+CREATE table "staff"(
+    "staffid" SERIAL not NULL,
+    "stafftype" CHARACTER VARYING(50) not null,
+    CONSTRAINT "staffpk" PRIMARY KEY ("staffid")
+);
+CREATE  TABLE "restaurant"(
+    "restaurantid" SERIAL NOT NULL,
+    "restaurantname" CHARACTER VARYING(100) not NULL,
+    "restaurantaddress" CHARACTER VARYING(300) not NULL,
+    "sectionid" INT not NULL,
+    "staffid" int,
+    CONSTRAINT "restaurantpk" PRIMARY KEY ("restaurantid"),
+    CONSTRAINT "sectionfk" FOREIGN KEY ("sectionid") REFERENCES "section" ("sectionid"),
+    CONSTRAINT "stafffk" FOREIGN key ("staffid") REFERENCES "staff" ("staffiD")
+);
+CREATE table "cashier"(
+    "staffid" INT,
+    CONSTRAINT "cashierpk" PRIMARY key ("staffid"),
+    CONSTRAINT "cashierfk" FOREIGN KEY ("staffid") REFERENCES "staff" ("staffid")  
+);
+CREATE table "waiter"(
+    "staffid" INT,
+    "waitername" CHARACTER VARYING(100),
+    "waiterphoneno" CHARACTER VARYING(20),
+    CONSTRAINT "waiterpk" PRIMARY key ("staffid"),
+    CONSTRAINT "waiterfk" FOREIGN KEY ("staffid") REFERENCES "staff" ("staffid")  
+);
+CREATE table "courier"(
+    "staffid" INT,
+    "couriername" CHARACTER VARYING(100),
+    "courierphoneno" CHARACTER VARYING(20),
+    CONSTRAINT "courierpk" PRIMARY key ("staffid"),
+    CONSTRAINT "courierfk" FOREIGN KEY ("staffid") REFERENCES "staff" ("staffid")  
+);
+ALTER TABLE "cashier" ADD COLUMN "cashierphoneno" CHARACTER VARYING(20);
+CREATE  table "order"(
+    "orderid" SERIAL,
+    "orderaddress" CHARACTER VARYING(300),
+    "totalprice" REAL,
+    "staffid" INT,
+    CONSTRAINT "orderpk" PRIMARY KEY ("orderid"),
+    CONSTRAINT "orderfk" FOREIGN key ("staffid") REFERENCES "staff" ("staffid")
+);
+CREATE table "kitchen"(
+    "sectionid" INT,
+    "orderid" INT,
+    CONSTRAINT "kitchenpk" PRIMARY KEY("sectionid"),
+    CONSTRAINT "kitchenfk" FOREIGN KEY("sectionid") REFERENCES "section" ("sectionid"),
+    CONSTRAINT "kitchenfk2" FOREIGN KEY("orderid") REFERENCES "order" ("orderid")
+);
+CREATE table "tables"(
+    "sectionid" INT,
+    "waiterid" INT,
+    "orderid" INT,
+    CONSTRAINT "tablepk" PRIMARY key ("sectionid"),
+    CONSTRAINT "tablefk" FOREIGN KEY ("waiterid") REFERENCES "waiter" ("staffid"),
+    CONSTRAINT "tablefk2" FOREIGN KEY ("orderid") REFERENCES "order" ("orderid"),
+    CONSTRAINT "tablefk3" FOREIGN key ("sectionid") REFERENCES "section" ("sectionid")
+);
+CREATE table "checkout"(
+    "sectionid" INT,
+    "cashierid" INT,
+    "orderid" int,
+    CONSTRAINT "checkoutpk" PRIMARY KEY ("sectionid"),
+    CONSTRAINT "checkoutfk" FOREIGN key ("sectionid") REFERENCES "section" ("sectionid"),
+    CONSTRAINT "checkoutfk2" FOREIGN key ("cashierid") REFERENCES "cashier" ("staffid"),
+    CONSTRAINT "checkoutfk3" FOREIGN key ("orderid") REFERENCES "order" ("orderid")  
+);
+CREATE TABLE "foods"(
+    "foodid" SERIAL,
+    "foodname" CHARACTER VARYING(100),
+    CONSTRAINT "foodspk" PRIMARY key ("foodid")
+);
+CREATE TABLE "beverages"(
+    "beverageid" SERIAL,
+    "beveragename" CHARACTER VARYING(100),
+    CONSTRAINT "beveragespk" PRIMARY key ("beverageid")
+);
+CREATE  TABLE "foodorder"(
+    "foodid" INT,
+    "orderid" INT,
+    CONSTRAINT "foodorderpk" PRIMARY KEY (foodid,orderid),
+    CONSTRAINT "foodorderfk" FOREIGN KEY ("foodid") REFERENCES "foods" ("foodid"),
+    CONSTRAINT "foodorderfk2" FOREIGN KEY ("orderid") REFERENCES "order" ("orderid")
+);
+CREATE table "beverageorder"(
+    "beverageid" int,
+    "orderid" INT,
+    CONSTRAINT "beverageorderpk" PRIMARY KEY (beverageid,orderid),
+    CONSTRAINT "beverageorderfk" FOREIGN key ("beverageid") REFERENCES "beverages" ("beverageid"),
+    CONSTRAINT "beverageorderfk2" FOREIGN KEY ("orderid") REFERENCES "order" ("orderid")
+);
