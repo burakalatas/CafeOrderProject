@@ -1,0 +1,22 @@
+﻿@model IEnumerable<DbmsHw.ViewModels.CourierInfo>
+@{
+    ViewData["Title"] = "Courier";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Courier ID</th>
+        <th>Courier Name</th>
+        <th>Courier Phone</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.id</td>
+            <td>@item.name</td>
+            <td>@item.phoneNo</td>
+        </tr>
+    }
+</table>
+

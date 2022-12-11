@@ -1,0 +1,22 @@
+﻿@model IEnumerable<DbmsHw.ViewModels.CashierInfo>
+@{
+    ViewData["Title"] = "Cashier";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Cashier ID</th>
+        <th>Cashier Name</th>
+        <th>Cashier Phone</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.id</td>
+            <td>@item.name</td>
+            <td>@item.phoneNo</td>
+        </tr>
+    }
+</table>
+
