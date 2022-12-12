@@ -1,4 +1,4 @@
-﻿
+﻿@model DbmsHw.Models.FoodAndBeverage
 @{
     ViewData["Title"] = "AddOrder";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,12 +6,32 @@
 
 <h1>AddOrder</h1>
 
-<form method="post">
+<form method="post" asp-action="AddOrder">
     <div class="form-group">
-        <label>Staff ID</label>
+        <label id="staffid">Staff ID</label>
         <input type="text" name="staffid" class="form-control" />
-        <label>Order Address</label>
+        <label id="orderaddress">Order Address</label>
         <input type="text" name="orderaddress" class="form-control" />
+        <label>Food Name</label>
+        @*@foreach (var item in Model)
+        {
+            <h3>@item.Foodname <span>&#8378</span>@item.Foodprice</h3>
+        }*@
+        <select class="form-control" name="foodname" id="foodname">
+            <option value="">Select a food...</option>
+            @foreach (var item in Model.Foodlists)
+            {
+                <option value="@item.Foodname">@item.Foodname <span>&#8378</span>@item.Foodprice</option>
+            }  
+        </select>
+        <label>Beverage Name</label>
+        <select class="form-control" name="beveragename" id="beveragename">
+            <option value="">Select a beverage...</option>
+            @foreach (var item in Model.Beveragelist)
+            {
+                <option value="@item.Beveragename">@item.Beveragename <span>&#8378</span>@item.Beverageprice</option>
+            }
+        </select>
     </div>
     <br />
     <button class="btn btn-info">Kaydet</button>
