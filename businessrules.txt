@@ -9,7 +9,7 @@ Business Rules
 	Each section has section id and section type. Sections are distinguished from each other by their section id.
 	
 	Each kitchen has sectionID, and orderID. Kitchens are distinguished from each other by their sectionID.
-	Each kitchen has at least zero order or could be many order.
+	Each kitchen has at least zero order or could be many order and each order comes from only one kitchen.
 	
 	Each table has sectionID, waiterID, orderID. Tables are distinguished from each other by their sectionID.
 	Each table has only one waiter and a waiter can be interested one or many tables.
@@ -39,9 +39,10 @@ Business Rules
 	
 	_________________
 	
-
-
-
 	
+	
+	
+
+
 	
 	
