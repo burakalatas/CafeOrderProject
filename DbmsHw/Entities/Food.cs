@@ -7,9 +7,11 @@ public partial class Food
 {
     public int Foodid { get; set; }
 
-    public string? Foodname { get; set; }
+    public string Foodname { get; set; } = null!;
 
-    public float? Foodprice { get; set; }
+    public float Foodprice { get; set; }
 
-    public virtual ICollection<Order> Orders { get; } = new List<Order>();
+    public int Orderid { get; set; }
+
+    public virtual Order Order { get; set; } = null!;
 }

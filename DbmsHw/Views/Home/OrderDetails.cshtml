@@ -1,0 +1,34 @@
+﻿@model DbmsHw.ViewModels.OrderDetailsInfo
+@{
+    ViewData["Title"] = "OrderDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center; margin-top:0.5em; margin-bottom:0.5em; color:#FAAB78;">Order Details</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Food Name</th>
+        <th>Food Price</th>
+    </tr>
+    @foreach (var item in Model.foodDetails)
+    {
+        <tr style="background-color:#E8F3D6">
+            <td>@item.FoodName</td>
+            <td><span>&#8378</span>@item.FoodPrice</td>
+        </tr>
+    }
+    <tr>
+        <th>Beverage Name</th>
+        <th>Beverage Price</th>
+    </tr>
+    @foreach (var item in Model.beverageDetails)
+    {
+        <tr style="background-color:#F4EAD5">
+            <td>@item.BeverageName</td>
+            <td><span>&#8378</span>@item.BeveragePrice</td>
+        </tr>
+    }
+</table>
+
+

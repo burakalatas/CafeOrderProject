@@ -1,0 +1,28 @@
+﻿@model  IEnumerable<DbmsHw.ViewModels.OrderInfo>
+@{
+    ViewData["Title"] = "Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center; margin-top:0.5em; margin-bottom:0.5em; color:#FAAB78;">Orders</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Order Address</th>
+        <th>Staff ID</th>
+        <th>Total Price</th>
+        <th>Order Details</th>
+        <th>Delete Order</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.OrderAddress</td>
+            <td>@item.StaffId</td>
+            <td><span>&#8378</span>@item.TotalPrice</td>
+            <td><a href="/Home/OrderDetails/@item.OrderId" class="btn btn-warning">See Details</a></td>
+            <td><a href="/Home/DeleteOrder/@item.OrderId" class="btn btn-danger">Delete</a></td>
+        </tr>
+    }
+</table>
+

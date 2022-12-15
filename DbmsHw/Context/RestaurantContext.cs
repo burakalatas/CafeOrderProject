@@ -61,23 +61,12 @@ public partial class RestaurantContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("beveragename");
             entity.Property(e => e.Beverageprice).HasColumnName("beverageprice");
+            entity.Property(e => e.Orderid).HasColumnName("orderid");
 
-            entity.HasMany(d => d.Orders).WithMany(p => p.Beverages)
-                .UsingEntity<Dictionary<string, object>>(
-                    "Beverageorder",
-                    r => r.HasOne<Order>().WithMany()
-                        .HasForeignKey("Orderid")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("beverageorderfk2"),
-                    l => l.HasOne<Beverage>().WithMany()
-                        .HasForeignKey("Beverageid")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("beverageorderfk"),
-                    j =>
-                    {
-                        j.HasKey("Beverageid", "Orderid").HasName("beverageorderpk");
-                        j.ToTable("beverageorder");
-                    });
+            entity.HasOne(d => d.Order).WithMany(p => p.Beverages)
+                .HasForeignKey(d => d.Orderid)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("beveragesfk");
         });
 
         modelBuilder.Entity<Beveragelist>(entity =>
@@ -115,7 +104,6 @@ public partial class RestaurantContext : DbContext
 
             entity.HasOne(d => d.Staff).WithOne(p => p.Cashier)
                 .HasForeignKey<Cashier>(d => d.Staffid)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("cashierfk");
         });
 
@@ -141,8 +129,7 @@ public partial class RestaurantContext : DbContext
 
             entity.HasOne(d => d.Section).WithOne(p => p.Checkout)
                 .HasForeignKey<Checkout>(d => d.Sectionid)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("checkoutfk");
+                .HasConstraintName("checkout");
         });
 
         modelBuilder.Entity<Courier>(entity =>
@@ -163,7 +150,6 @@ public partial class RestaurantContext : DbContext
 
             entity.HasOne(d => d.Staff).WithOne(p => p.Courier)
                 .HasForeignKey<Courier>(d => d.Staffid)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("courierfk");
         });
 
@@ -178,23 +164,11 @@ public partial class RestaurantContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("foodname");
             entity.Property(e => e.Foodprice).HasColumnName("foodprice");
+            entity.Property(e => e.Orderid).HasColumnName("orderid");
 
-            entity.HasMany(d => d.Orders).WithMany(p => p.Foods)
-                .UsingEntity<Dictionary<string, object>>(
-                    "Foodorder",
-                    r => r.HasOne<Order>().WithMany()
-                        .HasForeignKey("Orderid")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("foodorderfk2"),
-                    l => l.HasOne<Food>().WithMany()
-                        .HasForeignKey("Foodid")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("foodorderfk"),
-                    j =>
-                    {
-                        j.HasKey("Foodid", "Orderid").HasName("foodorderpk");
-                        j.ToTable("foodorder");
-                    });
+            entity.HasOne(d => d.Order).WithMany(p => p.Foods)
+                .HasForeignKey(d => d.Orderid)
+                .HasConstraintName("foodsdk");
         });
 
         modelBuilder.Entity<Foodlist>(entity =>
@@ -231,7 +205,6 @@ public partial class RestaurantContext : DbContext
 
             entity.HasOne(d => d.Section).WithOne(p => p.Kitchen)
                 .HasForeignKey<Kitchen>(d => d.Sectionid)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("kitchenfk");
         });
 
@@ -321,7 +294,6 @@ public partial class RestaurantContext : DbContext
 
             entity.HasOne(d => d.Section).WithOne(p => p.Table)
                 .HasForeignKey<Table>(d => d.Sectionid)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("tablefk3");
 
             entity.HasOne(d => d.Waiter).WithMany(p => p.Tables)
@@ -347,7 +319,6 @@ public partial class RestaurantContext : DbContext
 
             entity.HasOne(d => d.Staff).WithOne(p => p.Waiter)
                 .HasForeignKey<Waiter>(d => d.Staffid)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("waiterfk");
         });
 

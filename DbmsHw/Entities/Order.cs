@@ -13,15 +13,15 @@ public partial class Order
 
     public int? Staffid { get; set; }
 
+    public virtual ICollection<Beverage> Beverages { get; } = new List<Beverage>();
+
     public virtual ICollection<Checkout> Checkouts { get; } = new List<Checkout>();
+
+    public virtual ICollection<Food> Foods { get; } = new List<Food>();
 
     public virtual ICollection<Kitchen> Kitchens { get; } = new List<Kitchen>();
 
     public virtual Staff? Staff { get; set; }
 
     public virtual ICollection<Table> Tables { get; } = new List<Table>();
-
-    public virtual ICollection<Beverage> Beverages { get; } = new List<Beverage>();
-
-    public virtual ICollection<Food> Foods { get; } = new List<Food>();
 }

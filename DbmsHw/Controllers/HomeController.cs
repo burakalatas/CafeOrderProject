@@ -3,6 +3,7 @@ using DbmsHw.Entities;
 using DbmsHw.Models;
 using DbmsHw.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace DbmsHw.Controllers
@@ -19,7 +20,7 @@ namespace DbmsHw.Controllers
 
         public IActionResult Index()
         {
-            
+
 
 
             var courierName = c.Couriers.Select(m => new CourierInfo
@@ -47,7 +48,7 @@ namespace DbmsHw.Controllers
                 name = m.Cashiername,
                 phoneNo = m.Cashierphoneno
             });
-            
+
             return View(cashierName);
         }
         public IActionResult Courier()
@@ -86,24 +87,79 @@ namespace DbmsHw.Controllers
             return View(fb);
         }
         [HttpPost]
-        public IActionResult AddOrder(FoodName fn){
+        public IActionResult AddOrder(FoodName fn)
+        {
+            float foodPrice = c.Foodlists.Where(m => m.Foodname == fn.foodname).Select(m => m.Foodprice).FirstOrDefault();
+            float beveragePrice = c.Beveragelists.Where(m => m.Beveragename == fn.beveragename).Select(m => m.Beverageprice).FirstOrDefault();
 
             c.Orders.Add(new Order
             {
                 Orderaddress = fn.orderaddress,
                 Staffid = fn.staffID,
+                Totalprice = foodPrice + beveragePrice
             });
+            c.SaveChanges();
             c.Foods.Add(new Food
             {
+                Orderid = c.Orders.Max(m => m.Orderid),
                 Foodname = fn.foodname,
+                Foodprice = foodPrice
             });
             c.Beverages.Add(new Beverage
             {
+                Orderid = c.Orders.Max(m => m.Orderid),
                 Beveragename = fn.beveragename,
+                Beverageprice = beveragePrice
             });
             c.SaveChanges();
 
             return RedirectToAction("AddOrder");
+        }
+        public IActionResult Order()
+        {
+            var order = c.Orders.Select(m => new OrderInfo
+            {
+                OrderId = m.Orderid,
+                OrderAddress = m.Orderaddress,
+                StaffId = m.Staffid,
+                TotalPrice = m.Totalprice
+                
+            });
+            return View(order);
+        }
+        public IActionResult DeleteOrder(int id)
+        {
+            var order = c.Orders.Where(m => m.Orderid == id).FirstOrDefault();
+            c.Orders.Remove(order);
+            c.SaveChanges();
+            return RedirectToAction("Order");
+        }
+        public IActionResult OrderDetails(int id)
+        {
+            //Order? order = c.Orders.Where(x => x.Orderid == id).Include(x => x.Foods).FirstOrDefault();
+            //var foodname = c.Foods.Where(x => x.Orderid == id).FirstOrDefault();
+
+            OrderDetailsInfo orderDetailsInfo = new OrderDetailsInfo();
+
+            var foodDet = c.Foods.Where(x => x.Orderid == id).Select(m => new FoodDetails
+            {
+                FoodName = m.Foodname,
+                FoodPrice = m.Foodprice   
+            });
+            var bevDet = c.Beverages.Where(x => x.Orderid == id).Select(m => new BeverageDetails
+            {
+                BeverageName = m.Beveragename,
+                BeveragePrice = m.Beverageprice
+            });
+
+            orderDetailsInfo.beverageDetails = bevDet.ToList();
+            orderDetailsInfo.foodDetails = foodDet.ToList();
+
+
+            //var foodname = c.Orders.Where(a => a.Orderid == id).Include(b => b.)
+
+
+            return View(orderDetailsInfo);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

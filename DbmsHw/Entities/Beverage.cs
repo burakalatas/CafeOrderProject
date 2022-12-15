@@ -11,5 +11,7 @@ public partial class Beverage
 
     public float? Beverageprice { get; set; }
 
-    public virtual ICollection<Order> Orders { get; } = new List<Order>();
+    public int? Orderid { get; set; }
+
+    public virtual Order? Order { get; set; }
 }
