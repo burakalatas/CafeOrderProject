@@ -1,41 +1,48 @@
 Business Rules
 	
-	Each restaurant has id, name, address, section and staffs. Restaurants are distinguished from each other by their id.
+	+Each restaurant has id, name, address, section and staffs. Restaurants are distinguished from each other by their id.
 	
-	Each restaurant has at least one section or many section. Each section only has one restaurant.
+	+Each restaurant has at least one section or many section. Each section only has one restaurant.
 	
-	In the system, a section can exist in some categories:a kitchen, a table, a checkout. A section can't be just itself. 
-	A section can't be another section at the same time.
-	Each section has section id and section type. Sections are distinguished from each other by their section id.
+	+In the system, a section can exist in some categories:a kitchen, a table, a checkout. A section can't be just itself. 
+	+A section can't be another section at the same time.
+	+Each section has section id and section type. Sections are distinguished from each other by their section id.
 	
-	Each kitchen has sectionID, and orderID. Kitchens are distinguished from each other by their sectionID.
-	Each kitchen has at least zero order or could be many order and each order comes from only one kitchen.
+	+Each kitchen has sectionID, and orderID. Kitchens are distinguished from each other by their sectionID.
+	+Each kitchen has at least zero order or could be many order and each order comes from only one kitchen.
 	
-	Each table has sectionID, waiterID, orderID. Tables are distinguished from each other by their sectionID.
-	Each table has only one waiter and a waiter can be interested one or many tables.
-	Each table has only one order and an order only belongs to one table.
+	+Each table has sectionID, waiterID, orderID. Tables are distinguished from each other by their sectionID.
+	+Each table has only one waiter and a waiter can be interested one or many tables.
+	+Each table has only one order and an order only belongs to one table.
 	
-	Each checkout has sectionID, CashierID, OrderID. Checkouts are distinguished from each other by their sectionID.
-	Each checkout has only one cashier and each cashier has only one checkout.
-	
-	
-	Each restaurant has at least one staff or many staff. Each staff can only work in one restaurant.
-	
-	In the system, a staff can exist in some categories:a cashier, a waiter, a courier. A staff can be just itself.
-	Each staff has staffID and staff type. Staffs are distinguished from each other by their staffID.
-	Each staff has at least one order or many order and each order only one staff.
-	A staff can't be another staff at the same time.
-	
-	Each cashier has staffID. Cashiers are distinguished from each other by their staffID.
-	Each cashier has only one Checkout and one Checkout only has one cashier.
-	
-	Each waiter has staffID, name, surname, phone number. Waiters are distinguished from each other by their staffID.
-	Each waiter can be interested one table or many table. Each table has only one waiter.
+	+Each checkout has sectionID, CashierID, OrderID. Checkouts are distinguished from each other by their sectionID.
+	+Each checkout has only one cashier and each cashier has only one checkout.
 	
 	
-	Each order has orderID, foodID, beverageID, address, totalPrice, staffID. Orders are distinguished from each other by their orderID.
-	Each order has zero or many food and each food could be in zero or many order.
-	Each order has zero or many beverage and each beverage could be in zero or many order.
+	+Each restaurant has at least one staff or many staff. Each staff can only work in one restaurant.
+	
+	+In the system, a staff can exist in some categories:a cashier, a waiter, a courier. A staff can't be just itself.
+
+	+Each staff has staffID, staffType, name, surname, phone number. Staffs are distinguished from each other by their staffID.
+
+	+Each staff has at least one order or many order and each order only belongs to one staff.
+	+A staff can't be another staff at the same time.
+	
+	+Each cashier has staffID. Cashiers are distinguished from each other by their staffID.
+	
+	+Each waiter has staffID. Waiters are distinguished from each other by their staffID.
+
+	+Each courier has staffID. Couriers are distinguished from each other by their staffID.
+	
+	+Each waiter can be interested one table or many table. Each table has only one waiter.
+	
+	
+	+Each order has orderID, foodID, beverageID, address, totalPrice, staffID. Orders are distinguished from each other by their orderID.
+	+Each order has zero or many food and each food could be in zero or many order.
+	+Each order has zero or many beverage and each beverage could be in zero or many order.
+
+	+Food List contains Food Id, Food Price and Food Name.
+	+Beverage List contains Beverage Id, Beverage Price and Beverage Name.
 	
 	_________________
 	
