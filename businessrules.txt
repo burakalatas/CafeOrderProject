@@ -40,6 +40,6 @@ Business Rules
 	Each order includes zero or many food and each food could be in zero or many order.
 	Each order includes zero or many beverage and each beverage could be in zero or many order.
 
-	Food List contains Food Id, Food Price and Food Name.
-	Beverage List contains Beverage Id, Beverage Price and Beverage Name.
+	Food List contains Food Id, Food Price and Food Name. Foods are distinguished from each other by their Food Id.
+	Beverage List contains Beverage Id, Beverage Price and Beverage Name. Beverages are distinguished from each other by their Beverage Id.
 	
