@@ -16,7 +16,7 @@ Business Rules
 	Each table has only one order and an order belongs to only one table.
 	
 	Each checkout has sectionID, CashierID, OrderID. Checkouts are distinguished from each other by their sectionID.
-	Each checkout has only one cashier and each cashier has only one checkout.
+	Each checkout has only one cashier and each cashier is just responsible for one checkout.
 	
 	Each restaurant has at least one staff or many staff. Each staff can only work in one restaurant.
 	
