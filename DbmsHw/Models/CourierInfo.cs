@@ -1,6 +1,6 @@
-﻿namespace DbmsHw.ViewModels
+﻿namespace DbmsHw.Models
 {
-    public class WaiterInfo
+    public class CourierInfo
     {
         public int id { get; set; }
         public string? name { get; set; }

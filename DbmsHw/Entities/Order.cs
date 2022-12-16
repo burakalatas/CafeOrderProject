@@ -13,6 +13,8 @@ public partial class Order
 
     public int? Staffid { get; set; }
 
+    public int Tableid { get; set; }
+
     public virtual ICollection<Beverage> Beverages { get; } = new List<Beverage>();
 
     public virtual ICollection<Checkout> Checkouts { get; } = new List<Checkout>();
@@ -23,5 +25,5 @@ public partial class Order
 
     public virtual Staff? Staff { get; set; }
 
-    public virtual ICollection<Table> Tables { get; } = new List<Table>();
+    public virtual Table Table { get; set; } = null!;
 }

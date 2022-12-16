@@ -1,0 +1,24 @@
+﻿@model IEnumerable<FoodDetails>
+@{
+    ViewData["Title"] = "Food";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center; margin-top:0.5em; margin-bottom:0.5em; color:#FAAB78;">Food List</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Food Name</th>
+        <th>Food Price</th>
+        <th>Update</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.FoodName</td>
+            <td><span>&#8378</span>@item.FoodPrice</td>
+            <td><a href="/Home/UpdateFood/@item.FoodId" class="btn btn-success">Update</a></td>
+        </tr>
+    }
+</table>
+
