@@ -1,4 +1,4 @@
-namespace DbmsHw.Models
+namespace DbmsHw.ViewModels
 {
     public class ErrorViewModel
     {

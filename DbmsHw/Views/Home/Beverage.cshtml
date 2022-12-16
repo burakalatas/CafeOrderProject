@@ -1,0 +1,24 @@
+﻿@model IEnumerable<BeverageDetails>
+@{
+    ViewData["Title"] = "Beverage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center; margin-top:0.5em; margin-bottom:0.5em; color:#FAAB78;">Beverage List</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Beverage Name</th>
+        <th>Beverage Price</th>
+        <th>Update</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+            <tr>
+                <td>@item.BeverageName</td>
+            <td><span>&#8378</span>@item.BeveragePrice</td>
+            <td><a href="/Home/UpdateBeverage/@item.BeverageId" class="btn btn-success">Update</a></td>
+            </tr>
+    }
+</table>
+

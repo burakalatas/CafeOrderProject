@@ -19,7 +19,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Tables</a>
                         </li>
                         
                         <li class="nav-item dropdown">
@@ -38,6 +38,15 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Order">Orders</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Menu
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Food">Foods</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Beverage">Beverages</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -51,7 +60,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.Now.Year - DbmsHw - <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            &copy; @DateTime.Now.Year all rights reserved. | DbmsHw 
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

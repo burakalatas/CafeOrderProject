@@ -1,4 +1,4 @@
-﻿@model DbmsHw.Models.FoodAndBeverage
+﻿@model FoodAndBeverage
 @{
     ViewData["Title"] = "AddOrder";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,23 +8,53 @@
 
 <form method="post" asp-action="AddOrder">
     <div class="form-group">
-        <label id="staffid">Staff ID</label>
-        <input type="text" name="staffid" class="form-control" />
-        <label id="orderaddress">Order Address</label>
-        <input type="text" name="orderaddress" class="form-control" />
-        <label>Food Name</label>
-        @*@foreach (var item in Model)
+        <label id="tableid">Table No</label>
+        @if (ViewBag.TableNo != null)
         {
-            <h3>@item.Foodname <span>&#8378</span>@item.Foodprice</h3>
-        }*@
+            <input required type="text" name="tableid" value="@ViewBag.TableNo" readonly class="form-control" />
+        }
+        else
+        {
+            <select required class="form-control" name="tableid" id="tableid">
+                <option value="">Select a table...</option>
+                @foreach (var item in Model.tables)
+                {
+                    @if (item.Tableid != 0)
+                    {
+                        <option value="@item.Tableid">@item.Tableid</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Tableid">Online</option>
+                    }
+                }
+
+            </select>
+        }
+
+        <label id="staffid">Staff Name</label>
+        <select required class="form-control" name="staffid" id="staffid">
+            <option value="">Select a staff...</option>
+            @foreach (var item in Model.staffLists)
+            {
+                <option value="@item.Staffid">@item.Staffname - @item.Stafftype</option>
+            }
+        </select>
+
+        <label id="orderaddress">Order Address</label>
+        <input type="text" name="orderaddress" class="form-control" placeholder="For online orders..." />
+
+
+        <label>Food Name</label>
         <select class="form-control" name="foodname" id="foodname">
             <option value="">Select a food...</option>
             @foreach (var item in Model.Foodlists)
             {
                 <option value="@item.Foodname">@item.Foodname <span>&#8378</span>@item.Foodprice</option>
-            }  
+            }
         </select>
         <label>Beverage Name</label>
+
         <select class="form-control" name="beveragename" id="beveragename">
             <option value="">Select a beverage...</option>
             @foreach (var item in Model.Beveragelist)

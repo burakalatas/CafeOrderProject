@@ -1,0 +1,29 @@
+﻿@model IEnumerable<SeeTablesOrders>
+@{
+    ViewData["Title"] = "SeeTableOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center; margin-top:0.5em; margin-bottom:0.5em; color:#FAAB78;">Table Order Details</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Table No</th>
+        <th>Total Price</th>
+        <th>Details</th>
+        <th>Delete Order</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.TableId</td>
+            <td><span>&#8378</span>@item.TotalPrice</td>
+            <td><a href="/Home/OrderDetails/@item.OrderId" class="btn btn-warning">See Details</a></td>
+            <td><a href="/Home/DeleteOrder/@item.OrderId" class="btn btn-danger" onclick="return confirm ('Are you sure want to delete blog?');">Delete</a></td>
+        </tr>
+    }
+    <tr>
+        <td colspan="4" style="text-align:center; background-color:darkkhaki;">Your bill is <span>&#8378</span>@ViewBag.LastTotalPrice </td>
+    </tr>
+</table>
+

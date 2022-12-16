@@ -14,6 +14,4 @@ public partial class Checkout
     public virtual Cashier? Cashier { get; set; }
 
     public virtual Order? Order { get; set; }
-
-    public virtual Section Section { get; set; } = null!;
 }

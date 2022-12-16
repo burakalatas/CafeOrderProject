@@ -34,10 +34,6 @@ public partial class RestaurantContext : DbContext
 
     public virtual DbSet<Order> Orders { get; set; }
 
-    public virtual DbSet<Restaurant> Restaurants { get; set; }
-
-    public virtual DbSet<Section> Sections { get; set; }
-
     public virtual DbSet<Staff> Staff { get; set; }
 
     public virtual DbSet<Table> Tables { get; set; }
@@ -65,21 +61,18 @@ public partial class RestaurantContext : DbContext
 
             entity.HasOne(d => d.Order).WithMany(p => p.Beverages)
                 .HasForeignKey(d => d.Orderid)
-                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("beveragesfk");
         });
 
         modelBuilder.Entity<Beveragelist>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("beveragelist");
+            entity.HasKey(e => e.Beverageid).HasName("beveragelistpk");
+
+            entity.ToTable("beveragelist");
 
             entity.HasIndex(e => e.Beverageid, "unique_beveragelist_beverageid").IsUnique();
 
-            entity.Property(e => e.Beverageid)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("beverageid");
+            entity.Property(e => e.Beverageid).HasColumnName("beverageid");
             entity.Property(e => e.Beveragename)
                 .HasColumnType("character varying")
                 .HasColumnName("beveragename");
@@ -95,12 +88,6 @@ public partial class RestaurantContext : DbContext
             entity.Property(e => e.Staffid)
                 .ValueGeneratedNever()
                 .HasColumnName("staffid");
-            entity.Property(e => e.Cashiername)
-                .HasMaxLength(100)
-                .HasColumnName("cashiername");
-            entity.Property(e => e.Cashierphoneno)
-                .HasMaxLength(20)
-                .HasColumnName("cashierphoneno");
 
             entity.HasOne(d => d.Staff).WithOne(p => p.Cashier)
                 .HasForeignKey<Cashier>(d => d.Staffid)
@@ -126,10 +113,6 @@ public partial class RestaurantContext : DbContext
             entity.HasOne(d => d.Order).WithMany(p => p.Checkouts)
                 .HasForeignKey(d => d.Orderid)
                 .HasConstraintName("checkoutfk3");
-
-            entity.HasOne(d => d.Section).WithOne(p => p.Checkout)
-                .HasForeignKey<Checkout>(d => d.Sectionid)
-                .HasConstraintName("checkout");
         });
 
         modelBuilder.Entity<Courier>(entity =>
@@ -141,12 +124,6 @@ public partial class RestaurantContext : DbContext
             entity.Property(e => e.Staffid)
                 .ValueGeneratedNever()
                 .HasColumnName("staffid");
-            entity.Property(e => e.Couriername)
-                .HasMaxLength(100)
-                .HasColumnName("couriername");
-            entity.Property(e => e.Courierphoneno)
-                .HasMaxLength(20)
-                .HasColumnName("courierphoneno");
 
             entity.HasOne(d => d.Staff).WithOne(p => p.Courier)
                 .HasForeignKey<Courier>(d => d.Staffid)
@@ -173,15 +150,13 @@ public partial class RestaurantContext : DbContext
 
         modelBuilder.Entity<Foodlist>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("foodlist");
+            entity.HasKey(e => e.Foodid).HasName("foodlistpk");
+
+            entity.ToTable("foodlist");
 
             entity.HasIndex(e => e.Foodid, "unique_foodlist_foodid").IsUnique();
 
-            entity.Property(e => e.Foodid)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("foodid");
+            entity.Property(e => e.Foodid).HasColumnName("foodid");
             entity.Property(e => e.Foodname)
                 .HasMaxLength(100)
                 .HasColumnName("foodname");
@@ -202,10 +177,6 @@ public partial class RestaurantContext : DbContext
             entity.HasOne(d => d.Order).WithMany(p => p.Kitchens)
                 .HasForeignKey(d => d.Orderid)
                 .HasConstraintName("kitchenfk2");
-
-            entity.HasOne(d => d.Section).WithOne(p => p.Kitchen)
-                .HasForeignKey<Kitchen>(d => d.Sectionid)
-                .HasConstraintName("kitchenfk");
         });
 
         modelBuilder.Entity<Order>(entity =>
@@ -219,49 +190,16 @@ public partial class RestaurantContext : DbContext
                 .HasMaxLength(300)
                 .HasColumnName("orderaddress");
             entity.Property(e => e.Staffid).HasColumnName("staffid");
+            entity.Property(e => e.Tableid).HasColumnName("tableid");
             entity.Property(e => e.Totalprice).HasColumnName("totalprice");
 
             entity.HasOne(d => d.Staff).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.Staffid)
                 .HasConstraintName("orderfk");
-        });
 
-        modelBuilder.Entity<Restaurant>(entity =>
-        {
-            entity.HasKey(e => e.Restaurantid).HasName("restaurantpk");
-
-            entity.ToTable("restaurant");
-
-            entity.Property(e => e.Restaurantid).HasColumnName("restaurantid");
-            entity.Property(e => e.Restaurantaddress)
-                .HasMaxLength(300)
-                .HasColumnName("restaurantaddress");
-            entity.Property(e => e.Restaurantname)
-                .HasMaxLength(100)
-                .HasColumnName("restaurantname");
-            entity.Property(e => e.Sectionid).HasColumnName("sectionid");
-            entity.Property(e => e.Staffid).HasColumnName("staffid");
-
-            entity.HasOne(d => d.Section).WithMany(p => p.Restaurants)
-                .HasForeignKey(d => d.Sectionid)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("sectionfk");
-
-            entity.HasOne(d => d.Staff).WithMany(p => p.Restaurants)
-                .HasForeignKey(d => d.Staffid)
-                .HasConstraintName("stafffk");
-        });
-
-        modelBuilder.Entity<Section>(entity =>
-        {
-            entity.HasKey(e => e.Sectionid).HasName("sectionpk");
-
-            entity.ToTable("section");
-
-            entity.Property(e => e.Sectionid).HasColumnName("sectionid");
-            entity.Property(e => e.Sectiontype)
-                .HasMaxLength(50)
-                .HasColumnName("sectiontype");
+            entity.HasOne(d => d.Table).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.Tableid)
+                .HasConstraintName("tablefk");
         });
 
         modelBuilder.Entity<Staff>(entity =>
@@ -271,6 +209,13 @@ public partial class RestaurantContext : DbContext
             entity.ToTable("staff");
 
             entity.Property(e => e.Staffid).HasColumnName("staffid");
+            entity.Property(e => e.Staffname)
+                .HasColumnType("character varying")
+                .HasColumnName("staffname");
+            entity.Property(e => e.Staffphoneno)
+                .HasMaxLength(11)
+                .IsFixedLength()
+                .HasColumnName("staffphoneno");
             entity.Property(e => e.Stafftype)
                 .HasMaxLength(50)
                 .HasColumnName("stafftype");
@@ -278,27 +223,15 @@ public partial class RestaurantContext : DbContext
 
         modelBuilder.Entity<Table>(entity =>
         {
-            entity.HasKey(e => e.Sectionid).HasName("tablepk");
+            entity.HasKey(e => e.Tableid).HasName("tablespk");
 
             entity.ToTable("tables");
 
-            entity.Property(e => e.Sectionid)
+            entity.HasIndex(e => e.Tableid, "unique_tables_tableid").IsUnique();
+
+            entity.Property(e => e.Tableid)
                 .ValueGeneratedNever()
-                .HasColumnName("sectionid");
-            entity.Property(e => e.Orderid).HasColumnName("orderid");
-            entity.Property(e => e.Waiterid).HasColumnName("waiterid");
-
-            entity.HasOne(d => d.Order).WithMany(p => p.Tables)
-                .HasForeignKey(d => d.Orderid)
-                .HasConstraintName("tablefk2");
-
-            entity.HasOne(d => d.Section).WithOne(p => p.Table)
-                .HasForeignKey<Table>(d => d.Sectionid)
-                .HasConstraintName("tablefk3");
-
-            entity.HasOne(d => d.Waiter).WithMany(p => p.Tables)
-                .HasForeignKey(d => d.Waiterid)
-                .HasConstraintName("tablefk");
+                .HasColumnName("tableid");
         });
 
         modelBuilder.Entity<Waiter>(entity =>
@@ -310,12 +243,6 @@ public partial class RestaurantContext : DbContext
             entity.Property(e => e.Staffid)
                 .ValueGeneratedNever()
                 .HasColumnName("staffid");
-            entity.Property(e => e.Waitername)
-                .HasMaxLength(100)
-                .HasColumnName("waitername");
-            entity.Property(e => e.Waiterphoneno)
-                .HasMaxLength(20)
-                .HasColumnName("waiterphoneno");
 
             entity.HasOne(d => d.Staff).WithOne(p => p.Waiter)
                 .HasForeignKey<Waiter>(d => d.Staffid)
