@@ -1,8 +1,5 @@
 Business Rules
 	
-	Each restaurant has id, name, address, section and staffs. Restaurants are distinguished from each other by their id.
-	
-	Each restaurant has at least one section or many section. Each section only has one restaurant.
 	
 	In the system, a section can exist in some categories:a kitchen, a table, a checkout. A section can't be just itself. 
 	A section can't be another section at the same time.

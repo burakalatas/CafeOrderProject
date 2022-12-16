@@ -1,4 +1,4 @@
-Restaurant(RestaurantID:int, RestaurantName:varchar, RestaurantAddress:varchar, SectionID:int, StaffID:int)
+
 Section(SectionID:int, SectionType:varchar)
 Kitchen(SectionID:int, OrderID:int)
 Tables(SectionID:int, WaiterID:int, OrderID:int)
