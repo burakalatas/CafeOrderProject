@@ -1,0 +1,6 @@
+Introduction of the problem
+// We have a restaurant. We want to make our restaurant more trackable so we want to controll our orders, kitchens, storages, checkouts with a software.
+In today’s standards and needs requires online environment adaptation and internet integrity for this business to survive and grow. 
+As the business and system grows, other requirements occur, such as data analysis, data security, data management etc. 
+In order to provide these requirements, having the benefits of a database management system becomes a must and standard. 
+With the assistance of a database management system some problems such as data integrity, maintenance, data traceability etc. are solved.
