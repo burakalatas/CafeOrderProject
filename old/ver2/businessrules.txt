@@ -1,12 +1,5 @@
 Business Rules
 	
-	Each restaurant has id, name, address, section and staffs. Restaurants are distinguished from each other by their id.
-	
-	Each restaurant has at least one section or many section. Each section only has one restaurant.
-	
-	In the system, a section can exist in some categories:a kitchen, a table, a checkout. A section can't be just itself. 
-	A section can't be another section at the same time.
-	Each section has section id and section type. Sections are distinguished from each other by their section id.
 	
 	Each kitchen has sectionID, and orderID. Kitchens are distinguished from each other by their sectionID.
 	Each kitchen has at least zero order or could be many order and each order comes from only one kitchen.
@@ -16,9 +9,8 @@ Business Rules
 	Each table has only one order and an order belongs to only one table.
 	
 	Each checkout has sectionID, CashierID, OrderID. Checkouts are distinguished from each other by their sectionID.
-	Each checkout has only one cashier and each cashier has only one checkout.
+	Each checkout has only one cashier and each cashier is just responsible for one checkout.
 	
-	Each restaurant has at least one staff or many staff. Each staff can only work in one restaurant.
 	
 	In the system, a staff can exist in some categories:a cashier, a waiter, a courier. A staff can't be just itself.
 
