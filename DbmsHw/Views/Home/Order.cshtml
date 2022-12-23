@@ -8,6 +8,7 @@
 
 <table class="table table-bordered">
     <tr>
+        <th>Order Id</th>
         <th>Table No</th>
         <th>Order Address</th>
         <th>Staff</th>
@@ -18,6 +19,7 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td>@item.OrderId</td>
             <td>@item.TableId</td>
             <td>@item.OrderAddress</td>
             <td>@item.StaffId-@item.StaffName</td>

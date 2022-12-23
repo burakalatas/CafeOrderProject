@@ -8,17 +8,19 @@
 
 <table class="table table-bordered">
     <tr>
+        <th>Beverage Id</th>
         <th>Beverage Name</th>
         <th>Beverage Price</th>
         <th>Update</th>
     </tr>
     @foreach (var item in Model)
     {
-            <tr>
-                <td>@item.BeverageName</td>
+        <tr>
+            <td>@item.BeverageId</td>
+            <td>@item.BeverageName</td>
             <td><span>&#8378</span>@item.BeveragePrice</td>
             <td><a href="/Home/UpdateBeverage/@item.BeverageId" class="btn btn-success">Update</a></td>
-            </tr>
+        </tr>
     }
 </table>
 

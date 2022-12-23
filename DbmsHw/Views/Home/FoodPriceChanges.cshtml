@@ -1,0 +1,26 @@
+﻿@model IEnumerable<foodListPriceChanges>
+@{
+    ViewData["Title"] = "FoodPriceChanges";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center; margin-top:0.5em; margin-bottom:0.5em; color:#FAAB78;">Food Price Changes</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Food Id</th>
+        <th>Old Price</th>
+        <th>New Price</th>
+        <th>Update Date</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.FoodId</td>
+            <td>@item.OldFoodPrice</td>
+            <td>@item.NewFoodPrice</td>
+            <td>@item.UpdateDate</td>
+        </tr>
+    }
+</table>
+

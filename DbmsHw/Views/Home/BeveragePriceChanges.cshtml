@@ -1,0 +1,26 @@
+﻿@model IEnumerable<bevListPriceChanges>
+@{
+    ViewData["Title"] = "BeveragePriceChanges";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center; margin-top:0.5em; margin-bottom:0.5em; color:#FAAB78;">Beverage Price Changes</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Beverage Id</th>
+        <th>Old Price</th>
+        <th>New Price</th>
+        <th>Update Date</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.BeverageId</td>
+            <td>@item.OldBeveragePrice</td>
+            <td>@item.NewBeveragePrice</td>
+            <td>@item.UpdateDate</td>
+        </tr>
+    }
+</table>
+

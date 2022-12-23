@@ -20,15 +20,21 @@ public partial class RestaurantContext : DbContext
 
     public virtual DbSet<Beveragelist> Beveragelists { get; set; }
 
+    public virtual DbSet<Beveragelistpricechange> Beveragelistpricechanges { get; set; }
+
     public virtual DbSet<Cashier> Cashiers { get; set; }
 
     public virtual DbSet<Checkout> Checkouts { get; set; }
 
     public virtual DbSet<Courier> Couriers { get; set; }
 
+    public virtual DbSet<DeletedOrder> DeletedOrders { get; set; }
+
     public virtual DbSet<Food> Foods { get; set; }
 
     public virtual DbSet<Foodlist> Foodlists { get; set; }
+
+    public virtual DbSet<Foodlistpricechange> Foodlistpricechanges { get; set; }
 
     public virtual DbSet<Kitchen> Kitchens { get; set; }
 
@@ -42,7 +48,7 @@ public partial class RestaurantContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("User ID=postgres;Password=19391945;Host=localhost;Port=5432;Database=Restaurant2;");
+        => optionsBuilder.UseNpgsql("User ID=postgres;Password=burak;Host=localhost;Port=5432;Database=Restaurant;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -77,6 +83,21 @@ public partial class RestaurantContext : DbContext
                 .HasColumnType("character varying")
                 .HasColumnName("beveragename");
             entity.Property(e => e.Beverageprice).HasColumnName("beverageprice");
+        });
+
+        modelBuilder.Entity<Beveragelistpricechange>(entity =>
+        {
+            entity.HasKey(e => e.Beveragelistrecordno).HasName("beveragelistpricechangespk");
+
+            entity.ToTable("beveragelistpricechanges");
+
+            entity.Property(e => e.Beveragelistrecordno).HasColumnName("beveragelistrecordno");
+            entity.Property(e => e.Beverageid).HasColumnName("beverageid");
+            entity.Property(e => e.Newbeverageprice).HasColumnName("newbeverageprice");
+            entity.Property(e => e.Oldbeverageprice).HasColumnName("oldbeverageprice");
+            entity.Property(e => e.Updatedate)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("updatedate");
         });
 
         modelBuilder.Entity<Cashier>(entity =>
@@ -130,6 +151,24 @@ public partial class RestaurantContext : DbContext
                 .HasConstraintName("courierfk");
         });
 
+        modelBuilder.Entity<DeletedOrder>(entity =>
+        {
+            entity.HasKey(e => e.DeletedOrdersId).HasName("deletedOrdersPk");
+
+            entity.ToTable("deletedOrders");
+
+            entity.Property(e => e.DeletedOrdersId).HasColumnName("deletedOrdersId");
+            entity.Property(e => e.DeletedDate)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("deletedDate");
+            entity.Property(e => e.OrderAddress)
+                .HasColumnType("character varying")
+                .HasColumnName("orderAddress");
+            entity.Property(e => e.OrderId).HasColumnName("orderId");
+            entity.Property(e => e.StaffId).HasColumnName("staffId");
+            entity.Property(e => e.TableId).HasColumnName("tableId");
+        });
+
         modelBuilder.Entity<Food>(entity =>
         {
             entity.HasKey(e => e.Foodid).HasName("foodspk");
@@ -161,6 +200,21 @@ public partial class RestaurantContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("foodname");
             entity.Property(e => e.Foodprice).HasColumnName("foodprice");
+        });
+
+        modelBuilder.Entity<Foodlistpricechange>(entity =>
+        {
+            entity.HasKey(e => e.Foodlistrecordno).HasName("PK");
+
+            entity.ToTable("foodlistpricechanges");
+
+            entity.Property(e => e.Foodlistrecordno).HasColumnName("foodlistrecordno");
+            entity.Property(e => e.Foodid).HasColumnName("foodid");
+            entity.Property(e => e.Newfoodprice).HasColumnName("newfoodprice");
+            entity.Property(e => e.Oldfoodprice).HasColumnName("oldfoodprice");
+            entity.Property(e => e.Updatedate)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("updatedate");
         });
 
         modelBuilder.Entity<Kitchen>(entity =>

@@ -8,6 +8,7 @@
 
 <table class="table table-bordered">
     <tr>
+        <th>Food Id</th>
         <th>Food Name</th>
         <th>Food Price</th>
         <th>Update</th>
@@ -15,6 +16,7 @@
     @foreach (var item in Model)
     {
         <tr>
+            <td>@item.FoodId</td>
             <td>@item.FoodName</td>
             <td><span>&#8378</span>@item.FoodPrice</td>
             <td><a href="/Home/UpdateFood/@item.FoodId" class="btn btn-success">Update</a></td>

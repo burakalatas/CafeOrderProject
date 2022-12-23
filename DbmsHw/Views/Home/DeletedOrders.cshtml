@@ -1,0 +1,28 @@
+﻿@model IEnumerable<DeletedOrderInfo>
+@{
+    ViewData["Title"] = "DeletedOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center; margin-top:0.5em; margin-bottom:0.5em; color:#FAAB78;">Deleted Orders</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Order Id</th>
+        <th>Order Address</th>
+        <th>Staff Id</th>
+        <th>Table Id</th>
+        <th>Deleted Date</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+            <tr>
+                <td>@item.OrderId</td>
+                <td>@item.OrderAddress</td>
+                <td>@item.StaffId</td>
+                <td>@item.TableId</td>
+                <td>@item.OrderDeletedTime</td>
+            </tr>
+    }
+</table>
+

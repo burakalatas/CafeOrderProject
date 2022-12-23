@@ -72,6 +72,18 @@ namespace DbmsHw.Controllers
             }).OrderBy(m => m.FoodId);
             return View(foodList);
         }
+        public IActionResult FoodPriceChanges()
+        {
+            var foodPriceChanges = c.Foodlistpricechanges.Select(m => new foodListPriceChanges
+            {
+                FoodId = m.Foodid,
+                OldFoodPrice = m.Oldfoodprice,
+                NewFoodPrice = m.Newfoodprice,
+                UpdateDate = m.Updatedate
+            });
+            return View(foodPriceChanges);
+                
+        }
         [HttpGet]
         public IActionResult UpdateFood(int id)
         {
@@ -107,6 +119,19 @@ namespace DbmsHw.Controllers
                 BeveragePrice = m.Beverageprice
             }).OrderBy(m => m.BeverageId);
             return View(bevList);
+        }
+        public IActionResult BeveragePriceChanges()
+        {
+            var beverageListPriceChange = c.Beveragelistpricechanges.Select(m => new bevListPriceChanges
+             {
+                 BeverageId =m.Beverageid,
+                 OldBeveragePrice = m.Oldbeverageprice,
+                 NewBeveragePrice = m.Newbeverageprice,
+                 UpdateDate = m.Updatedate
+
+            }).OrderBy(m => m.BeverageId);
+
+            return View(beverageListPriceChange);
         }
         [HttpGet]
         public IActionResult UpdateBeverage(int id)
@@ -210,6 +235,18 @@ namespace DbmsHw.Controllers
                 
             }).OrderBy(m=>m.OrderId);
             return View(order);
+        }
+        public IActionResult DeletedOrders()
+        {
+            var deletedOrder = c.DeletedOrders.Select(m => new DeletedOrderInfo
+            {
+                OrderId = m.OrderId,
+                OrderAddress = m.OrderAddress,
+                StaffId = m.StaffId,
+                TableId = m.TableId,
+                OrderDeletedTime =m.DeletedDate
+            }).OrderBy(m => m.OrderId);
+            return View(deletedOrder);
         }
         public IActionResult DeleteOrder(int id)
         {
