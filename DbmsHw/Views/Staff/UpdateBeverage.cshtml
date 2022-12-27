@@ -1,0 +1,23 @@
+﻿@model BeverageDetails
+@{
+    ViewData["Title"] = "UpdateBeverage";
+    Layout = "~/Views/Shared/_StaffLayout.cshtml";
+}
+
+<h2 style="text-align:center; margin-top:0.5em; margin-bottom:0.5em; color:#FAAB78;">Update Beverage</h2>
+
+<form method="post" asp-action="UpdateBeverage">
+    <div class="form-group">
+        <label id="beverageid"></label>
+        <input hidden name="beverageid" value="@Model.BeverageId" class="form-control" />
+
+        <label id="beveragename">Beverage Name</label>
+        <input name="beveragename" value="@Model.BeverageName" class="form-control" />
+
+        <label id="beverageprice">Beverage Price</label>
+        <input name="beverageprice" value="@Model.BeveragePrice" class="form-control" />
+        <br />
+        <button class="btn btn-info">Save</button>
+    </div>
+</form>
+

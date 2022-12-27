@@ -1,0 +1,47 @@
+﻿<header>
+    <nav class="navbar navbar-light navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebHW</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Tables</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Staff
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Staff" asp-action="Cashier">Cashiers</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Staff" asp-action="Courier">Couriers</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Staff" asp-action="Waiter">Waiters</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Staff" asp-action="Food">Foods</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Staff" asp-action="Beverage">Beverages</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Logs
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Staff" asp-action="DeletedOrders">Deleted Orders</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Staff" asp-action="FoodPriceChanges">Food Price Changes</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Staff" asp-action="BeveragePriceChanges">Beverage Price Changes</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
