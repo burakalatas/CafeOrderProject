@@ -2,6 +2,7 @@
 using DbmsHw.Entities;
 using DbmsHw.Models;
 using DbmsHw.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -15,44 +16,17 @@ namespace DbmsHw.Controllers
         
         public IActionResult Index()
         {
-            return View();
-        }
-        public IActionResult Courier()
-        {
-            var courierName = c.Couriers.Select(m => new CourierInfo
+            var staffinfo = c.Staff.Select(m => new StaffInfo
             {
                 id = m.Staffid,
-                name = m.Staff.Staffname,
-                phoneNo = m.Staff.Staffphoneno
+                name = m.Staffname,
+                phoneNo = m.Staffphoneno,
+                staffType = m.Stafftype 
             });
-
-            return View(courierName);
+            
+            return View(staffinfo);
         }
 
-        public IActionResult Waiter()
-        {
-            var waiterName = c.Waiters.Select(m => new WaiterInfo
-            {
-                id = m.Staffid,
-                name = m.Staff.Staffname,
-                phoneNo = m.Staff.Staffphoneno
-            });
-
-            return View(waiterName);
-        }
-
-        public IActionResult Cashier()
-        {
-
-            var cashierName = c.Cashiers.Select(m => new CashierInfo
-            {
-                id = m.Staffid,
-                name = m.Staff.Staffname,
-                phoneNo = m.Staff.Staffphoneno
-            });
-
-            return View(cashierName);
-        }
         public IActionResult Food()
         {
             var foodList = c.Foodlists.Select(m => new FoodDetails

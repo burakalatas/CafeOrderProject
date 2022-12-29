@@ -2,12 +2,14 @@
 using DbmsHw.Entities;
 using DbmsHw.Models;
 using DbmsHw.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace DbmsHw.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

@@ -44,6 +44,8 @@ public partial class RestaurantContext : DbContext
 
     public virtual DbSet<Table> Tables { get; set; }
 
+    public virtual DbSet<User> Users { get; set; }
+
     public virtual DbSet<Waiter> Waiters { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -286,6 +288,21 @@ public partial class RestaurantContext : DbContext
             entity.Property(e => e.Tableid)
                 .ValueGeneratedNever()
                 .HasColumnName("tableid");
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e => e.Userid).HasName("userpk");
+
+            entity.ToTable("user");
+
+            entity.Property(e => e.Userid).HasColumnName("userid");
+            entity.Property(e => e.Username)
+                .HasColumnType("character varying")
+                .HasColumnName("username");
+            entity.Property(e => e.Userpassword)
+                .HasColumnType("character varying")
+                .HasColumnName("userpassword");
         });
 
         modelBuilder.Entity<Waiter>(entity =>
